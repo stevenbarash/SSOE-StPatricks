@@ -197,6 +197,14 @@ body {
   }
 }
 
+.wheel-animated {
+  animation-name: spin;
+  animation-duration: 500ms;
+  animation-iteration-count: 20;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
 .wheel {
   background-color: white;
   width: 300px;
@@ -213,28 +221,27 @@ body {
 }
 .wheel-container {
   display: flex;
+  flex-direction: column;
   align-content: center;
   justify-items: center;
-  align-items: center;
+
+  /* align-items: center; */
 
   justify-content: center;
   margin-right: 20px;
 }
 .arrow {
   font-size: 20px;
+  /* margin-top: 90px; */
+  /* position: relative;
+  top: 100;
+  left: 47%; */
   text-align: center;
   color: white;
-  top: 90%;
+  /* top: 40%; */
   z-index: 5;
 }
-.wheel-animated {
-  animation-name: spin;
-  animation-duration: 1000ms;
-  animation-iteration-count: 2;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-  animation-play-state: running;
-}
+
 .stop-animation {
   animation-play-state: paused;
 }

@@ -12,8 +12,11 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //stores score
       score: 0,
+      //stores the letters guessed previously in a list
       guessedLetters: [],
+      //stores the letters that are correct guesses
       correctLetters: [
         "H",
         "A",
@@ -29,49 +32,58 @@ export default class App extends Component {
         "W",
         "N"
       ],
+      //stores the value where the wheel spin lands
       currentWheelValue: 500
     };
     this.spinWheel = this.spinWheel.bind(this);
   }
 
-  // animateWheel() {
-  //   var rotation;
-  //   var wheel = document.getElementById("wheel");
-
-  //   let randomNum = Math.floor(Math.random() * 10);
-  //   rotation += 30 * 10 + 30 * randomNum;
-
-  //   TweenMax.to(wheel, 10, {
-  //     ease: Power4.easeOut,
-  //     rotation: rotation,
-  //     onComplete: this.checkGuess
-  //   });
-  // }
+  //runs the animation for the wheel spin
+  //grabs where the spin lands
+  // then runs promptGuess function to ask user for a letter
 
   async spinWheel() {
+    var timeToSpin = Math.floor(Math.random() * 300) + 1000;
     var wheel = document.getElementById("wheel");
     var wheelStyle = window.getComputedStyle(wheel, null);
 
-    // wheel.classList.remove("stop-animation");
-    wheel.classList.add("wheel-animated");
+    // wheel.style.animation = "animation: spin 1000ms 2 linear forwards running";
+    wheel.classList.remove("stop-animation");
+    wheel.classList.remove("wheel-animated");
 
+    wheel.classList.add("wheel-animated");
+    wheel.style.animationDuration = timeToSpin.toString();
     wheel.style.animationPlayState = "running";
 
-    // var newWheel = wheel.cloneNode(true);
+    var newWheel = wheel.cloneNode(true);
 
-    // wheel.parentNode.replaceChild(newWheel, wheel);
+    wheel.parentNode.replaceChild(newWheel, wheel);
 
     // console.log((Math.random*10))
 
-    var angle = 0;
+    //randomly generates how long the wheel spins in milliseconds
+    //minimum of 1000ms + random number between 0 and 1000ms
+    var timeUntilStopsSpinning = Math.floor(Math.random() * 1000) + 1500;
+    // var angle = 0;
     setTimeout(() => {
-      // var wheel = document.getElementById("wheel");
-      // var wheelStyle = window.getComputedStyle(wheel, null);
+      var wheel = document.getElementById("wheel");
+      var wheelStyle = window.getComputedStyle(wheel, null);
+
+      // wheel.classList.remove("wheel-animated");
+      // wheel.classList.add("stop-animation");
+
+      if (wheelStyle.animationPlayState === "running") {
+        wheel.style.animationPlayState = "paused";
+        // document.body.className = "paused";
+      }
+
+      // wheel.style.animationPlayState = "paused";
 
       // wheel.classList.add("stop-animation");
-      wheel.style.animationPlayState = "paused";
 
       var rotation = wheelStyle.getPropertyValue("transform");
+
+      console.log(rotation);
 
       //takes cosine and sine of rotation, does some geometry to get rotation degree value
       if (rotation !== "none" && rotation !== null) {
@@ -81,24 +93,28 @@ export default class App extends Component {
           .split(",");
         var a = values[0];
         var b = values[1];
-        angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+        var angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
       } else {
-        var angle = 0;
+        angle = 0;
       }
 
       //make sure the wheel rotation doesn't reset
       // wheel.style.transform = "rotate(" + angle + "deg)";
 
+      //convert angle to positive
+      angle = Math.abs(angle);
       console.log(angle);
 
       // sets the currentWheelValue to the value the spinner is at
       // the higher scores are between these degrees of rotation
-      if (angle <= 185 && angle >= 173) {
+      if (angle <= 187 && angle >= 155) {
         this.setState({
           currentWheelValue: 1000
         });
-      }
-      if ((angle <= 7 && angle >= 0) || (angle <= 353 && angle >= 359)) {
+      } else if (
+        (angle <= 15 && angle >= 0) ||
+        (angle <= 340 && angle >= 359)
+      ) {
         this.setState({
           currentWheelValue: 2500
         });
@@ -107,12 +123,11 @@ export default class App extends Component {
           currentWheelValue: 500
         });
       }
-      console.log(rotation);
-      // wheel.classList.add("stop-animation");
-      wheel.classList.remove("wheel-animated");
 
-      this.checkGuess();
-    }, 1200);
+      console.log("wheel value:" + this.state.currentWheelValue);
+      //prompts user to guess
+      return 1;
+    }, timeUntilStopsSpinning);
 
     // document.getElementById("wheel").classList.remove("wheel-animated");
     // document.getElementById("wheel").classList.remove("stop-animation");
@@ -128,11 +143,12 @@ export default class App extends Component {
     // }
 
     //do UI stuff, make spin random
-    return 1;
   }
 
-  async checkGuess() {
-    // var doneSpinning = await this.spinWheel();
+  async awaitSpin() {
+    const spin = this.spinWheel();
+
+    // spin.then(()this.promptGuess());
 
     // var doneSpinning = true;
 
@@ -140,40 +156,42 @@ export default class App extends Component {
     // if not, then it checks if it is in the correct letters array
     // adds/subtracts score based on current wheel value depending on correct/incorrect answer
     // this.spinWheel();
+  }
+
+  promptGuess() {
     var input = prompt("Enter a Letter");
     var guess = "";
     //rejects input if null or length greater than 1
     if (input !== null && input.length == 1) {
       guess = input.toUpperCase();
+
+      if (this.state.guessedLetters.includes(guess)) {
+        alert("You already guessed this.");
+        this.promptGuess();
+      } else {
+        //check if correctletters array contains guess
+        if (this.state.correctLetters.includes(guess)) {
+          this.setState({
+            score: this.state.score + this.state.currentWheelValue
+          });
+          this.state.guessedLetters.push(guess);
+
+          this.addToBoard(guess);
+          // if (this.state.guessedLetters.includes) {
+          //   alert("You win!");
+          // }
+        } else {
+          //subtract current wheel value from score, record guessed letter
+          var newScore = this.state.score - this.state.currentWheelValue;
+          this.state.guessedLetters.push(guess);
+
+          this.setState({ score: newScore });
+        }
+      }
     } else {
       alert("Please only input single letters.");
     }
-
-    if (this.state.guessedLetters.includes(guess)) {
-      alert("You already guessed this.");
-      this.checkGuess();
-    } else {
-      //check if correctletters array contains guess
-      if (this.state.correctLetters.includes(guess)) {
-        this.setState({
-          score: this.state.score + this.state.currentWheelValue
-        });
-        this.state.guessedLetters.push(guess);
-
-        this.addToBoard(guess);
-        // if (this.state.guessedLetters.includes) {
-        //   alert("You win!");
-        // }
-      } else {
-        //subtract current wheel value from score, record guessed letter
-        var newScore = this.state.score - this.state.currentWheelValue;
-        this.state.guessedLetters.push(guess);
-
-        this.setState({ score: newScore });
-      }
-    }
   }
-
   addToBoard(correctLetter) {
     //adds letter to board
     // check at the end if all letters are added, disable spin button
@@ -423,7 +441,7 @@ export default class App extends Component {
         <button
           className={"reset-btn"}
           onClick={() => {
-            this.spinWheel();
+            this.awaitSpin();
           }}
         >
           Spin

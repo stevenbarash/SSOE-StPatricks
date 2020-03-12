@@ -154,15 +154,25 @@ body {
   font-weight: 700;
   /* flex-direction: column; */
 }
+.score-display {
+  color: white;
+}
 
 #canvas {
-  height: 230px;
-  width: 300px;
+  /* object-fit: scale-down; */
+
+  width: 100%;
+  height: 100%;
+  /* height: 400px; */
+  /* width: px; */
 }
 .wheel-container {
+  /* object-fit: scale-down; */
+  object-fit: scale-down;
+
   display: flex;
-  height: 500px;
-  width: 300px;
+  height: 220px;
+  width: 400px;
   flex-direction: column;
   align-content: center;
   justify-items: center;
@@ -170,10 +180,10 @@ body {
   /* align-items: center; */
 
   justify-content: center;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 .arrow {
-  font-size: 20px;
+  font-size: 10px;
   /* margin-top: 90px; */
   /* position: relative;
   top: 100;

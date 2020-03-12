@@ -1,11 +1,12 @@
 // Create new wheel object specifying the parameters at creation time.
 let theWheel = new Winwheel({
   numSegments: 12, // Specify number of segments.
-  outerRadius: 90, // Set outer radius so wheel fits inside the background.
-  textFontSize: 20, // Set font size as desired.
-  textFontFamily: "Impact",
+  outerRadius: 74, // Set outer radius so wheel fits inside the background.
+  textFontSize: 14, // Set font size as desired.
+  // textFontFamily: "Impact",
   textOrientation: "vertical",
-  textStrokeStyle: "white",
+  // textStrokeStyle: "white",
+  textFontWeight: "bolder",
   // Define segments including colour and text.
   segments: [
     { fillStyle: "#009f52", text: "2500" },

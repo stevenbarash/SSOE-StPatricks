@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="./Winwheel.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  </head>
+  <body>
+    <div class="fl-container">
+      <div class="logo">
+        <span class="logo__text">Luck O'</span>
+        <span class="logo__text second">The Irish</span>
+        <span class="logo__shadow">Luck O'</span>
+        <span class="logo__shadow second">The Irish</span>
+      </div>
+      <div class="game-area-container">
+        <canvas id="canvas">
+          Canvas not supported, use another browser.
+        </canvas>
+
+        <div class="container">
+          <div class="tile push">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="H"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="A"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="P"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="P"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="Y"></p>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+
+          <div class="tile start">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="S"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="T"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p>.</p>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="P"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="A" />
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="T"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="T"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="Y"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p>'</p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="S"></p>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+
+          <div class="tile start">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="D"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="A"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="Y"></p>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="F"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="R"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="O"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="M"></p>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+
+          <div class="tile push">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="S"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="W"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="A"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="N"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="S"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="O"></p>
+            </div>
+          </div>
+          <div class="tile white">
+            <div class="inner">
+              <p class="N" />
+            </div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+          <div class="tile">
+            <div class="inner"></div>
+          </div>
+        </div>
+      </div>
+      <h1 class="score-display">Score: 0</h1>
+      <button class="reset-btn" onclick="resetWheel();startSpin()">
+        Spin
+      </button>
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>
